@@ -61,6 +61,12 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('weather.index') }}"><i class="fas fa-newspaper fa-fw me-2"></i> News & Weather</a>
         </li>
+        <li class="nav-item">
+    <a class="nav-link" href="{{ route('shelters.index') }}"><i class="fas fa-home fa-fw me-2"></i> Holding Centers</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('aid_requests.index') }}"><i class="fas fa-hands-helping fa-fw me-2"></i> Aid Requests</a>
+</li>
     </ul>
 
     <!-- Bottom Section (User & Logout) -->

@@ -24,12 +24,15 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body>
-    <div id="app">
-        <!-- Include the Sidebar Partial -->
-        @include('partials.navbar')
-
-        <!-- Main Content -->
+<body class="has-sidebar">
+        <div id="app">
+        <!-- Switch between Admin Sidebar and User Top Navbar -->
+        @if(auth()->check())
+            @include('partials.navbar')
+        @else
+            @include('partials.user_navbar')
+        @endif
+  <!-- Main Content -->
         <div class="main-content">
             <!-- Mobile Toggle Button (Only shows on small screens) -->
             <button class="btn btn-dark d-lg-none mb-3" id="sidebarToggle">
@@ -37,9 +40,12 @@
             </button>
 
             <!-- Page Content -->
-            <main>
-                @yield('content')
-            </main>
+           <!-- Page Content -->
+<main>
+    @yield('content')
+</main>
+            
+        
         </div>
     </div>
 

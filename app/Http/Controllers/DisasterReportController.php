@@ -12,7 +12,11 @@ class DisasterReportController extends Controller
         $reports = DisasterReport::latest()->get();
         return view('disasters.index', compact('reports'));
     }
-
+    // Returns disasters as JSON for real-time map
+    public function getDisasters()
+    {
+        return response()->json(DisasterReport::all());
+    }
     public function create()
     {
         return view('disasters.create');
@@ -28,10 +32,14 @@ class DisasterReportController extends Controller
             'status' => 'required|in:Active,Contained,Resolved'
         ]);
 
-        DisasterReport::create($validated);
-        return redirect()->route('disasters.index')->with('success', 'Disaster reported successfully!');
-    }
+                DisasterReport::create($validated);
 
+        // Smart Redirect: Admin goes to admin table, User goes to user homepage
+        if (auth()->check()) {
+            return redirect()->route('disasters.index')->with('success', 'Disaster reported successfully!');
+        }
+        return redirect()->route('user.home')->with('success', 'Thank you for reporting the disaster! Authorities have been notified.');
+    }
     public function edit(DisasterReport $disaster)
     {
         return view('disasters.edit', compact('disaster'));

@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class HoldingCenter extends Model
 {
-    //
+   protected $fillable = ['name', 'latitude', 'longitude', 'capacity'];
 }

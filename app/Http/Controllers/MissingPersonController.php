@@ -7,12 +7,19 @@ use Illuminate\Http\Request;
 
 class MissingPersonController extends Controller
 {
+         // Show all missing people
     public function index()
     {
         $missingPeople = MissingPerson::latest()->get();
-        return view('missing.index', compact('missingPeople'));
+        
+        // If Admin is logged in, show the admin table (with Edit/Delete buttons)
+        if(auth()->check()) {
+            return view('missing.index', compact('missingPeople'));
+        }
+        
+        // If it's a public user, show the frontend cards
+        return view('frontend.missing_list', compact('missingPeople'));
     }
-
     public function create()
     {
         return view('missing.create');
@@ -34,9 +41,13 @@ class MissingPersonController extends Controller
             $validated['image'] = $path;
         }
 
-        MissingPerson::create($validated);
+            MissingPerson::create($validated);
 
-        return redirect()->route('missing.index')->with('success', 'Person added successfully!');
+        // Smart Redirect
+        if (auth()->check()) {
+            return redirect()->route('missing.index')->with('success', 'Person added successfully!');
+        }
+        return redirect()->route('user.home')->with('success', 'Missing person report submitted successfully!');
     }
 
     // 1. SHOW EDIT FORM

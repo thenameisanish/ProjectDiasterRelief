@@ -3,8 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Custom Favicon (Life Ring Emoji) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛟</text></svg>">
     <title>Admin Login - Disaster Relief System</title>
-    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛟</text></svg>">
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -53,12 +56,16 @@
         
         <div class="input-group mb-3">
             <span class="input-group-text bg-light"><i class="fas fa-user"></i></span>
-            <input type="text" class="form-control" name="username" placeholder="Username" value="{{ old('username') }}" required autofocus>
+            <input type="text" class="form-control" name="username" placeholder="Username (admin)" value="{{ old('username') }}" required autofocus>
         </div>
 
         <div class="input-group mb-3">
             <span class="input-group-text bg-light"><i class="fas fa-lock"></i></span>
-            <input type="password" class="form-control" name="password" placeholder="Password" required>
+            <input type="password" class="form-control" id="password-field" name="password" placeholder="Password" required>
+            <!-- Show/Hide Password Button -->
+            <button class="btn btn-outline-secondary" type="button" id="togglePassword" tabindex="-1">
+                <i class="fas fa-eye" id="toggleIcon"></i>
+            </button>
         </div>
 
         <div class="d-grid">
@@ -71,5 +78,27 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JavaScript to toggle password visibility -->
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function (e) {
+        // Get the password input field and the icon
+        const passwordInput = document.getElementById('password-field');
+        const toggleIcon = document.getElementById('toggleIcon');
+
+        // Toggle the type attribute
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+
+        // Toggle the eye icon
+        if (type === 'password') {
+            toggleIcon.classList.remove('fa-eye-slash');
+            toggleIcon.classList.add('fa-eye');
+        } else {
+            toggleIcon.classList.remove('fa-eye');
+            toggleIcon.classList.add('fa-eye-slash');
+        }
+    });
+</script>
 </body>
 </html>

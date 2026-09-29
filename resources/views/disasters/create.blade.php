@@ -58,7 +58,7 @@
                         <input type="hidden" name="longitude" id="longitude" required>
 
                         <div class="mb-3">
-                            <label class="form-label fw-bold">📍 Click on Map to Set Location</label>
+                            <label class="form-label fw-bold"> Click on Map to Set Location</label>
                             <!-- Leaflet Map Container -->
                             <div id="map" style="height: 400px; width: 100%; border-radius: 5px;"></div>
                         </div>
