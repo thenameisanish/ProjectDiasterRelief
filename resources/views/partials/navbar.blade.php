@@ -67,6 +67,9 @@
 <li class="nav-item">
     <a class="nav-link" href="{{ route('aid_requests.index') }}"><i class="fas fa-hands-helping fa-fw me-2"></i> Aid Requests</a>
 </li>
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('damages.index') }}"><i class="fas fa-house-damage fa-fw me-2"></i> Damage Assessment</a>
+</li>
     </ul>
 
     <!-- Bottom Section (User & Logout) -->

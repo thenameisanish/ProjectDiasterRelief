@@ -97,5 +97,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/api/donations', [App\Http\Controllers\DonationController::class, 'getDonations'])->name('api.donations');
     // API route for JavaScript to get live news
 Route::get('/api/news', [App\Http\Controllers\FrontendController::class, 'getNews'])->name('api.news');
+    // Damage Assessment Routes
+    Route::get('/damages', [App\Http\Controllers\DamageReportController::class, 'index'])->name('damages.index');
+    Route::get('/damages/create', [App\Http\Controllers\DamageReportController::class, 'create'])->name('damages.create');
+    Route::post('/damages', [App\Http\Controllers\DamageReportController::class, 'store'])->name('damages.store');
+    Route::delete('/damages/{damage}', [App\Http\Controllers\DamageReportController::class, 'destroy'])->name('damages.destroy');
+        // Damage Assessment PDF Route
+    Route::get('/damages/pdf', [App\Http\Controllers\DamageReportController::class, 'downloadPDF'])->name('damages.pdf');
 
 });
