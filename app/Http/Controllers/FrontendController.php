@@ -6,6 +6,7 @@ use App\Models\Alert;
 use App\Models\WeatherReport;
 use Illuminate\Http\Request;
 use App\Models\HoldingCenter;
+use App\Models\DisasterReport;
 
 class FrontendController extends Controller
 {
@@ -42,5 +43,11 @@ public function checkAlert()
     {
         $alerts = Alert::latest()->take(3)->get();
         return response()->json($alerts);
+    }
+        // Show public disaster map
+    public function disasterMap()
+    {
+        $disasters = DisasterReport::where('status', 'Active')->get(); // Only show active disasters to public
+        return view('frontend.disaster_map', compact('disasters'));
     }
 }

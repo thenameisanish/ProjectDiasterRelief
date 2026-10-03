@@ -68,6 +68,9 @@
   <li class="nav-item">
             <a class="nav-link" href="{{ route('user.news') }}"><i class="fas fa-newspaper fa-fw me-2"></i> News & Weather</a>
         </li>
+        <li class="nav-item">
+    <a class="nav-link" href="{{ route('user.disasters') }}"><i class="fas fa-map-marked-alt fa-fw me-2"></i> View Disaster Map</a>
+</li>
     </ul>
 
     <!-- Bottom Section (Admin Login) -->

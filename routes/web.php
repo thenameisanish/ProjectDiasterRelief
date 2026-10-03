@@ -32,6 +32,8 @@ Route::get('/donations/create', [App\Http\Controllers\DonationController::class,
 Route::post('/donations', [App\Http\Controllers\DonationController::class, 'store'])->name('donations.store');
 // API route for JavaScript to get live alerts list
 Route::get('/api/latest-alerts', [App\Http\Controllers\FrontendController::class, 'getLatestAlerts'])->name('api.alerts');
+// Public Disaster Map
+Route::get('/disaster-map', [App\Http\Controllers\FrontendController::class, 'disasterMap'])->name('user.disasters');
 
 Auth::routes();
 
