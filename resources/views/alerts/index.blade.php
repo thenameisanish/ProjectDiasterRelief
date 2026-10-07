@@ -52,7 +52,7 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn btn-danger w-100">🚨 Broadcast Alert</button>
+                       <button type="submit" class="btn btn-danger w-100"><i class="fas fa-bell"></i> Broadcast Alert</button>
                     </form>
                 </div>
             </div>
