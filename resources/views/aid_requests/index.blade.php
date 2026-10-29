@@ -31,21 +31,29 @@
     <td><span class="badge bg-info text-dark">{{ $request->resource_needed }}</span></td>
     <td>{{ $request->quantity }} {{ $request->unit }}</td> <!-- Combined Qty and Unit -->
     <td>
-        @if($request->status == 'Pending')
-            <span class="badge bg-warning text-dark">Pending</span>
-        @else
-            <span class="badge bg-success">Approved</span>
-        @endif
-    </td>
+    @if($request->status == 'Pending')
+        <span class="badge bg-warning text-dark">Pending</span>
+    @elseif($request->status == 'Approved')
+        <span class="badge bg-success">Approved</span>
+    @elseif($request->status == 'Declined')
+        <span class="badge bg-danger">Declined</span>
+    @else
+        <span class="badge bg-primary">Delivered</span>
+    @endif
+</td>
     <td>
-        @if($request->status == 'Pending')
-            <a href="{{ route('aid_requests.approve', $request->id) }}" class="btn btn-sm btn-success">
-                <i class="fas fa-check"></i> Approve
-            </a>
-        @else
-            <span class="text-muted small">No action needed</span>
-        @endif
-    </td>
+    @if($request->status == 'Pending')
+        <a href="{{ route('aid_requests.approve', $request->id) }}" class="btn btn-sm btn-success">
+            <i class="fas fa-check"></i> Approve
+        </a>
+        <!-- NEW DECLINE BUTTON -->
+        <a href="{{ route('aid_requests.decline', $request->id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to decline this request?')">
+            <i class="fas fa-times"></i> Decline
+        </a>
+    @else
+        <span class="text-muted small">No action needed</span>
+    @endif
+</td>
 </tr>
 
                     @endforeach

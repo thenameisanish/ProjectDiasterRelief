@@ -7,6 +7,7 @@ use App\Models\WeatherReport;
 use Illuminate\Http\Request;
 use App\Models\HoldingCenter;
 use App\Models\DisasterReport;
+use App\Models\AidRequest;
 
 class FrontendController extends Controller
 {
@@ -50,4 +51,23 @@ public function checkAlert()
         $disasters = DisasterReport::where('status', 'Active')->get(); // Only show active disasters to public
         return view('frontend.disaster_map', compact('disasters'));
     }
+     public function trackAid()
+    {
+        return view('frontend.track_aid');
+    }
+
+    // Search for the user's request using their phone number
+    public function searchAid(Request $request)
+    {
+        $request->validate([
+            'contact_number' => 'required|string'
+        ]);
+
+        // Find all requests made by this phone number
+        $requests = AidRequest::where('contact_number', $request->contact_number)->latest()->get();
+
+        return view('frontend.track_aid', compact('requests'));
+    }
 }
+    
+   

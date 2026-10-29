@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('user.home');
 // User News Page
 Route::get('/news', [App\Http\Controllers\FrontendController::class, 'newsIndex'])->name('user.news');
+// Track Aid Request Routes
+Route::get('/track-aid', [App\Http\Controllers\FrontendController::class, 'trackAid'])->name('user.track_aid');
+Route::post('/track-aid', [App\Http\Controllers\FrontendController::class, 'searchAid'])->name('user.search_aid');
 
 // API route for JavaScript to check alerts (MUST BE HERE AT THE TOP)
 Route::get('/check-latest-alert', [App\Http\Controllers\FrontendController::class, 'checkAlert'])->name('check.alert');
@@ -80,6 +83,7 @@ Route::middleware(['auth'])->group(function () {
     // Aid Requests Management
     Route::get('/aid-requests', [App\Http\Controllers\AidRequestController::class, 'index'])->name('aid_requests.index');
     Route::get('/aid-requests/{id}/approve', [App\Http\Controllers\AidRequestController::class, 'approve'])->name('aid_requests.approve');
+    Route::get('/aid-requests/{id}/decline', [App\Http\Controllers\AidRequestController::class, 'decline'])->name('aid_requests.decline'); 
 
     // Alerts Management
     Route::get('/alerts', [App\Http\Controllers\AlertController::class, 'index'])->name('alerts.index');

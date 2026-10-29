@@ -43,12 +43,11 @@ class AidRequestController extends Controller
         $reliefCategory = $categoryMap[$validated['resource_needed']] ?? 'Other';
         $totalStock = ReliefMaterial::where('category', $reliefCategory)->sum('quantity');
 
-        // CHECK 1: If stock is 0 (or item doesn't exist at all)
         if ($totalStock <= 0) {
             return redirect()->back()->with('error', "Sorry, we currently have 0 {$validated['resource_needed']} in our inventory. Request denied.")->withInput();
         }
 
-        // CHECK 2: If requested quantity is greater than available stock
+        
         if ($validated['quantity'] > $totalStock) {
             return redirect()->back()->with('error', "Sorry, we only have {$totalStock} {$validated['unit']}s of {$validated['resource_needed']} in stock. Please request a lower amount.")->withInput();
         }
@@ -97,5 +96,14 @@ class AidRequestController extends Controller
         $aidRequest->save();
 
         return redirect()->back()->with('success', 'Aid Request Approved. Stock has been deducted from inventory.');
+    }
+        // Admin: Decline request
+    public function decline($id)
+    {
+        $aidRequest = AidRequest::findOrFail($id);
+        $aidRequest->status = 'Declined';
+        $aidRequest->save();
+
+        return redirect()->back()->with('success', 'Aid Request has been declined.');
     }
 }

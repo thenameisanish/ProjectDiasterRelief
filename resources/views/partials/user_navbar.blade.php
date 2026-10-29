@@ -71,6 +71,9 @@
         <li class="nav-item">
     <a class="nav-link" href="{{ route('user.disasters') }}"><i class="fas fa-map-marked-alt fa-fw me-2"></i> View Disaster Map</a>
 </li>
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('user.track_aid') }}"><i class="fas fa-search fa-fw me-2"></i> Track My Request</a>
+</li>
     </ul>
 
     <!-- Bottom Section (Admin Login) -->
